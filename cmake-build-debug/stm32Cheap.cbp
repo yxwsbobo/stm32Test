@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="stm32Cheap"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stm32Cheap.elf">
+				<Option output="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/stm32Cheap.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__weak=__attribute__((weak))"/>
+					<Add option="-D__packed=__attribute__((__packed__))"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xB"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Inc"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0/arm-none-eabi"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/include"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/include-fixed"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 stm32Cheap.elf"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stm32Cheap.elf/fast">
+				<Option output="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/stm32Cheap.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__weak=__attribute__((weak))"/>
+					<Add option="-D__packed=__attribute__((__packed__))"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32F103xB"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Inc"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
+					<Add directory="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0/arm-none-eabi"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include/c++/8.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/include"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/include-fixed"/>
+					<Add directory="/usr/lib/gcc/arm-none-eabi/8.3.0/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 stm32Cheap.elf/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="UPLOAD">
+				<Option working_dir="/home/kin/CLionProjects/stm32Cheap/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 UPLOAD"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/arm_common_tables.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/arm_const_structs.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/arm_math.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/cmsis_armcc.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/cmsis_armcc_V6.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/cmsis_gcc.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cm0.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cm0plus.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cm3.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cm4.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cm7.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cmFunc.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cmInstr.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_cmSimd.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_sc000.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/CMSIS/Include/core_sc300.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/gpio.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/main.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/spi.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/stm32f1xx_hal_conf.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/stm32f1xx_it.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Inc/tim.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/STM32F103C8Tx_FLASH.ld">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/CommonStruct.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/GPIOGuard.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/GPIOGuard.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Config.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Config.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Manager.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Manager.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Socket.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/W5500Socket.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/WOLInterface.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/WOLInterface.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/WOLManager.cpp">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/WOLManager.h">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/gpio.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/main.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/spi.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/stm32f1xx_hal_msp.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/stm32f1xx_it.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/syscalls.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/system_stm32f1xx.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/Src/tim.c">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/startup/startup_stm32f103xb.s">
+			<Option target="stm32Cheap.elf"/>
+		</Unit>
+		<Unit filename="/home/kin/CLionProjects/stm32Cheap/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
