@@ -31,6 +31,9 @@ int RunCode(){
 #ifdef __cplusplus
 }
 
+uint16_t ChangeLittleBigEnd(uint16_t value) {
+    return ((value & 0x00ff)<<8) | ((value & 0xff00)>>8);
+}
 
 
 #endif

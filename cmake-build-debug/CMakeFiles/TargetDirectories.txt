@@ -1,4 +1,0 @@
-/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/CMakeFiles/stm32Cheap.elf.dir
-/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/kin/CLionProjects/stm32Cheap/cmake-build-debug/CMakeFiles/UPLOAD.dir

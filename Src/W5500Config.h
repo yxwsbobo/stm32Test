@@ -12,9 +12,11 @@
 class W5500Config {
 
 public:
-    std::string loadMacAddress();
+    void loadMacAddress(uint8_t* mac);
     IpInfo loadIpInfo();
+    void saveIpInfo(IpInfo& ipInfo);
     bool isManual();
+
 
 };
 

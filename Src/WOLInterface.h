@@ -9,9 +9,14 @@ extern "C" {
 #endif
 #include "gpio.h"
 
+    extern int GlobalFlag;
+
     int RunCode();
 
-    typedef struct GPIOInfo_{
+    uint16_t ChangeLittleBigEnd(uint16_t value);
+
+
+typedef struct GPIOInfo_{
         GPIO_TypeDef* Port;
         uint16_t Pin;
     }GPIOInfo;

@@ -6,6 +6,7 @@
 #define STM32CHEAP_COMMONSTRUCT_H
 
 #include <string>
+#include "TransmitStruct.h"
 
 enum class SocketType{
     TCP,
@@ -25,10 +26,16 @@ enum class ModeRegisterConfigAddress{
     Gatway = 0X1,
     SubnetMask = 0X5,
     SourceMac = 0X9,
-    SourceIP = 0XF
+    SourceIP = 0XF,
+    InterruptLevel = 0x13,
+    InterruptRegister = 0x15,
+    InterruptMaskRegister = 0x16,
+    SocketInterruptRegister = 0x17,
+    SocketInterruptMaskRegister = 0x18
 };
 
 enum class SocketRegister {
+    ModeRegister = 0x0,
     Register = 0x8,
     SendBuffer = 0x10,
     ReceiveBuffer = 0x18
@@ -43,7 +50,7 @@ enum class SocketModeRegisterValue{
     Multicast = 0x80
 };
 
-enum class SocketConfigRegisterValue{
+enum class SocketCommandRegisterValue{
     Open = 0x1,
     Listen = 0x2,
     Connect = 0x4,
@@ -73,9 +80,17 @@ enum class SocketStateRegisterValue{
     LAST_ACK = 0X1D
 };
 
+enum class SocketInterruptRegisterValue{
+    Connect = 0x1,
+    DisConnect = 0x2,
+    Receive = 0x4,
+    TimeOut = 0x8,
+    SendOk = 0x10
+};
+
 enum class SocketRegisterAddress{
     ModeRegister = 0x0,
-    ConfigRegister = 0x1,
+    CommandRegister = 0x1,
     InterruptRegister = 0x2,
     StateRegister = 0x3,
     Port = 0X4,
@@ -87,9 +102,18 @@ enum class SocketRegisterAddress{
     TransmitBuffersize = 0X1F,
     TXReadPointer = 0x22,
     TXWritePointer = 0x24,
+    RXRecievedSize = 0x26,
     RXReadPointer = 0x28,
     RXWritePointer = 0x2A,
+    InterruptMaskRegister = 0x2c,
     KeepaliveTimer = 0x2F
+};
+
+enum class InterruptMaskRegisterValue{
+    MagicPackage = 0x10,
+    PPPOE = 0x20,
+    AddressUnavaliable = 0x40,
+    IpConflict = 0x80
 };
 
 enum class RegisterAccessControl{
@@ -98,18 +122,19 @@ enum class RegisterAccessControl{
 };
 
 struct IpInfo{
-    std::string gateWay;
-    std::string mask;
-    std::string Ip;
+    uint8_t gateWay[4];
+    uint8_t mask[4];
+    uint8_t Ip[4];
 };
 
 struct SocketInfo{
 
-    std::string destIp;
+    uint8_t destIp[4];
     uint16_t destPort;
     SocketType type;
     uint32_t index;
 };
+
 
 
 #endif //STM32CHEAP_COMMONSTRUCT_H

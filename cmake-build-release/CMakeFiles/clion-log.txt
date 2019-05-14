@@ -1,4 +1,0 @@
-/home/kin/Programs/clion-2018.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" /home/kin/CLionProjects/stm32Cheap
--- Configuring done
--- Generating done
--- Build files have been written to: /home/kin/CLionProjects/stm32Cheap/cmake-build-release

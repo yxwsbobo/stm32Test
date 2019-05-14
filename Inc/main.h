@@ -62,6 +62,7 @@ void Error_Handler(void);
 #define LED_GPIO_Port GPIOC
 #define WNet_INT_Pin GPIO_PIN_2
 #define WNet_INT_GPIO_Port GPIOA
+#define WNet_INT_EXTI_IRQn EXTI2_IRQn
 #define WNet_RST_Pin GPIO_PIN_3
 #define WNet_RST_GPIO_Port GPIOA
 #define WNet_SCS_Pin GPIO_PIN_4

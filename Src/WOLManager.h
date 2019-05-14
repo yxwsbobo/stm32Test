@@ -23,6 +23,20 @@ private:
     int Running = 1;
     std::shared_ptr<W5500Manager> w5500Manager;
     LEDDeviceInfo ledDeviceInfo;
+
+    MessageInfo FillMessageInfo(uint8_t *buffer, int size);
+
+    void ProcessInfo(W5500Socket& socket, MessageInfo info);
+
+    void WakePc(W5500Socket &socket, const uint8_t* mac);
+
+    void saveServerIp(uint8_t *ip);
+
+    void saveServerPort(uint16_t port);
+
+    EndPoint loadServerInfo();
+
+    void saveMacAddress(uint8_t *mac);
 };
 
 
