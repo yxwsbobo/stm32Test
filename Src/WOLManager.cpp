@@ -31,10 +31,11 @@ int WOLManager::Run() {
     auto testSocket = w5500Manager->newSocket(loadServerInfo());
 
     uint32_t i = 0;
+    int j = 0;
 
     while(Running)
     {
-        if(testSocket.Receive(Buffer, 64)){
+        if(testSocket->Receive(Buffer, 64)){
             auto info = FillMessageInfo(Buffer,64);
             ProcessInfo(testSocket, info);
         }
@@ -43,13 +44,14 @@ int WOLManager::Run() {
             MessageHead mh{};
             mh.Type = MessageType::HeartBeat;
             w5500Manager->getMac(mh.Mac);
-            testSocket.Transmit(&mh, sizeof(mh));
+            testSocket->Transmit(&mh, sizeof(mh));
+            if(j++ %20 == 0){
+                w5500Manager->leasedDHCP();
+            }
         }
         if((i %200000) == 0){
             HAL_GPIO_TogglePin(ledDeviceInfo.Led.Port, ledDeviceInfo.Led.Pin);
         }
-
-
     }
     return 0;
 }
@@ -74,28 +76,32 @@ MessageInfo WOLManager::FillMessageInfo(uint8_t *buffer, int size) {
     return info;
 }
 
-void WOLManager::ProcessInfo(W5500Socket& socket, MessageInfo info) {
+void WOLManager::ProcessInfo(std::unique_ptr<W5500Socket>& socket, MessageInfo info) {
+    if(info.head.CheckSum[0] != 0X6B || info.head.CheckSum[1] != 0X69 || info.head.CheckSum[2] != 0x6E){
+        return;
+    }
+
     if(info.head.Type == MessageType::ASK){
         auto sSize = std::min((size_t)info.from.Size, sizeof(info.head));
-        socket.Transmit(&info.head, sSize, info.from);
+        socket->Transmit(&info.head, sSize, info.from);
     }
     else if(info.head.Type == MessageType::WakePc){
         WakePc(socket, info.head.Mac);
     }
     else if(info.head.Type == MessageType::SetServerIp){
         saveServerIp(info.head.Ip);
-        socket.setDestIp(info.head.Ip);
+        socket->setDestIp(info.head.Ip);
 
     }else if(info.head.Type == MessageType::SetServerPort){
         saveServerPort(info.head.Port);
-        socket.setDestPort(info.head.Port);
+        socket->setDestPort(info.head.Port);
     }else if(info.head.Type == MessageType::SetMac){
         saveMacAddress(info.head.Mac);
         w5500Manager->setMacAddress(info.head.Mac);
     }
 }
 
-void WOLManager::WakePc(W5500Socket &socket, const uint8_t *mac) {
+void WOLManager::WakePc(std::unique_ptr<W5500Socket> &socket, const uint8_t *mac) {
     uint8_t sendBuffer[102];
     EndPoint broadPoint{};
     w5500Manager->getBroadAddress(broadPoint.Ip);
@@ -111,7 +117,7 @@ void WOLManager::WakePc(W5500Socket &socket, const uint8_t *mac) {
         }
     }
 
-    socket.Transmit(sendBuffer,102,broadPoint);
+    socket->Transmit(sendBuffer,102,broadPoint);
 
     for (int i = 0; i < 20; ++i) {
         Test(100);

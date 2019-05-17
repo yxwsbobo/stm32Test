@@ -129,6 +129,7 @@ struct IpInfo{
 
 struct SocketInfo{
 
+    uint16_t sourcePort;
     uint8_t destIp[4];
     uint16_t destPort;
     SocketType type;

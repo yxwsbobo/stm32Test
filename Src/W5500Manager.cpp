@@ -11,6 +11,7 @@
 #include "gpio.h"
 #include "GPIOGuard.h"
 #include "string.h"
+#include "DHCPHelp.h"
 
 W5500Manager::W5500Manager(const W5500DeviceInfo &w5500DeviceInfo, std::unique_ptr<W5500Config> config)
         :deviceInfo{w5500DeviceInfo}, config{std::move(config)}
@@ -41,7 +42,7 @@ void W5500Manager::setInterrupt() {
     auto value = (uint8_t)InterruptMaskRegisterValue::IpConflict | (uint8_t)InterruptMaskRegisterValue::AddressUnavaliable;
     writeRegister(ModeRegisterConfigAddress::InterruptMaskRegister, &value, 1);
 
-    value = 0xff;
+    value = 0xfE;
     writeRegister(ModeRegisterConfigAddress::SocketInterruptMaskRegister, &value, 1);
 }
 
@@ -54,9 +55,20 @@ void W5500Manager::setIpInfo(IpInfo ipInfo) {
 
 void W5500Manager::setIpInfoAuto() {
 
-    IpInfo ipInfo = GetIpInfoFromHDCP();
+    IpInfo ipInfo{};
+    for (int i = 0; i < 1000; ++i) {
+        ipInfo = GetIpInfoFromDHCP();
+        if(*(uint32_t*)ipInfo.Ip != 0){
+            break;
+        }
+        HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+        for (int j = 0; j < 100; ++j) {
+            HAL_Delay(100);
+        }
+    }
 
-    config->saveIpInfo(ipInfo);
+
+//    config->saveIpInfo(ipInfo);
 
     return setIpInfo(ipInfo);
 }
@@ -96,20 +108,21 @@ void W5500Manager::ReadSPIRegister(uint16_t offset, uint8_t *buff, size_t size, 
     HAL_SPI_Receive(deviceInfo.hspi, (uint8_t*)buff, size,timeout);
 }
 
-W5500Socket W5500Manager::newSocket(std::string destIp, uint16_t destPort, SocketType type) {
+//W5500Socket W5500Manager::newSocket(std::string destIp, uint16_t destPort,uint16_t port, SocketType type) {
+//
+//    EndPoint endPoint;
+//    sscanf(destIp.c_str(), "%d.%d.%d.%d",&endPoint.Ip[0], &endPoint.Ip[1], &endPoint.Ip[2], &endPoint.Ip[3]);
+//    endPoint.Port = destPort;
+//    return newSocket(endPoint,port, type);
+//}
 
-    EndPoint endPoint;
-    sscanf(destIp.c_str(), "%d.%d.%d.%d",&endPoint.Ip[0], &endPoint.Ip[1], &endPoint.Ip[2], &endPoint.Ip[3]);
-    endPoint.Port = destPort;
-    return newSocket(endPoint,type);
-}
-
-W5500Socket W5500Manager::newSocket(EndPoint edPoint, SocketType type) {
+std::unique_ptr<W5500Socket> W5500Manager::newSocket(EndPoint edPoint,uint16_t port, SocketType type) {
     SocketInfo info{};
 
     memcpy(info.destIp, edPoint.Ip,4);
     info.destPort = edPoint.Port;
     info.type = type;
+    info.sourcePort = port;
 
     //Todo Need check is socket empty
     info.index = 8;
@@ -122,7 +135,7 @@ W5500Socket W5500Manager::newSocket(EndPoint edPoint, SocketType type) {
         }
     }
 
-    return W5500Socket(shared_from_this(), info);
+    return std::unique_ptr<W5500Socket>(new W5500Socket(shared_from_this(), info));
 }
 
 
@@ -139,6 +152,10 @@ uint8_t W5500Manager::GetSocketReceiveRegister(int index) {
 }
 
 void W5500Manager::releaseSocket(int index) {
+    writeRegister(index, SocketCommandRegisterValue::Close);
+    writeRegister(index, SocketModeRegisterValue::Closed);
+    setSocketPort(index, 0);
+
     socketsState[index] = false;
 }
 
@@ -261,6 +278,8 @@ void W5500Manager::setTXWritePointer(int index, uint16_t offset) {
 }
 
 void W5500Manager::writeTXWriteBuffer(int index, void *buffer, int size) {
+
+    //Todo fix offset
     auto offset = getTXWritePointer(index);
 
     WriteSPIRegister(offset, (uint8_t*)buffer, size, GetSocketSendRegister(index));
@@ -283,6 +302,7 @@ uint16_t W5500Manager::readRXReceivedBuffer(int index, void *buffer, int bufferS
     }
     realSize = std::min((int)realSize, bufferSize);
 
+    //Todo fix offset
     uint16_t offset = getRXReadPointer(index);
 
     ReadSPIRegister(offset, (uint8_t*)buffer, realSize, GetSocketReceiveRegister(index));
@@ -325,12 +345,77 @@ void W5500Manager::getMac(uint8_t *mac) {
     config->loadMacAddress(mac);
 }
 
-IpInfo W5500Manager::GetIpInfoFromHDCP() {
-    //Todo get ipinfo use DHCP
+#pragma pack(1)
+struct DHCPRecvStruct{
+    uint8_t Ip[4];
+    uint16_t Port;
+    uint16_t Size;
+    RIP_MSG msg;
+};
+#pragma pack()
+
+IpInfo W5500Manager::GetIpInfoFromDHCP() {
     IpInfo result{};
+    setIpInfo(result);
 
+    uint8_t mac[6];
+    config->loadMacAddress(mac);
+    dhcpHelp = DHCPHelp{mac, "SamingWake"};
 
-    return result;
+    EndPoint endPoint{{255,255,255,255}, 67};
+    dhcpSocket = newSocket(endPoint,68);
+
+    auto fn =[&](RIP_MSG& tmpMsg){
+        EndPoint destPoint{};
+        dhcpHelp.GetDestIp(destPoint.Ip);
+        dhcpHelp.GetDestPort(destPoint.Port);
+        dhcpSocket->Transmit(&tmpMsg, sizeof(tmpMsg), destPoint);
+        HAL_Delay(50);
+        DHCPRecvStruct recvStruct{};
+        auto recvFlag = false;
+        for (int i = 0; i < 30; ++i) {
+            GlobalFlag = 1;
+            if(dhcpSocket->Receive(&recvStruct, sizeof(recvStruct))){
+                dhcpHelp.parseMsgAndBuild(recvStruct.msg, tmpMsg, recvStruct.Ip, ChangeLittleBigEnd(recvStruct.Port));
+                recvFlag = true;
+            }else{
+                HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+                HAL_Delay(100);
+            }
+        }
+        if(recvFlag){
+            return dhcpHelp.getState();
+        }else{
+            return DHCPHelp::Fail;
+        }
+    };
+
+    auto msg = dhcpHelp.BuildDiscover();
+
+    int tryTimes = 0;
+    while(true){
+        auto tState = fn(msg);
+        if(tState == DHCPHelp::Fail){
+            return result;
+        }
+        if(tState == DHCPHelp::Success){
+            dhcpHelp.GetIp(result.Ip);
+            dhcpHelp.GetMask(result.mask);
+            dhcpHelp.GetGateway(result.gateWay);
+            return result;
+        }
+        if(tryTimes++ >=20){
+            return result;
+        }
+    }
+}
+
+void W5500Manager::leasedDHCP() {
+    auto msg = dhcpHelp.BuildReRequest();
+    EndPoint destPoint{};
+    dhcpHelp.GetDestIp(destPoint.Ip);
+    dhcpHelp.GetDestPort(destPoint.Port);
+    dhcpSocket->Transmit(&msg, sizeof(msg), destPoint);
 }
 
 

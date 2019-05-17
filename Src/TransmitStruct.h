@@ -18,12 +18,13 @@ enum class MessageType : uint8_t {
 };
 
 struct MessageHead{
-    MessageType Type;
+    uint8_t CheckSum[4] ={0x00,0X4B, 0X69, 0X6E};
+    MessageType Type{MessageType::Unknown};
 
     union {
         uint16_t Port;
         uint8_t Ip[4];
-        uint8_t Mac[6];
+        uint8_t Mac[6]{};
     };
 
 };

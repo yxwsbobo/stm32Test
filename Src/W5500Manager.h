@@ -12,12 +12,13 @@
 #include "CommonStruct.h"
 #include "WOLInterface.h"
 #include "W5500Socket.h"
+#include "DHCPHelp.h"
 
 class W5500Manager: public std::enable_shared_from_this<W5500Manager> {
 public:
 
-    W5500Socket newSocket(std::string destIp, uint16_t destPort, SocketType type = SocketType::UDP);
-    W5500Socket newSocket(EndPoint info, SocketType type = SocketType::UDP);
+//    W5500Socket newSocket(std::string destIp, uint16_t destPort,uint16_t port, SocketType type = SocketType::UDP);
+    std::unique_ptr<W5500Socket> newSocket(EndPoint info, uint16_t port = 5000, SocketType type = SocketType::UDP);
 
 public:
 
@@ -31,6 +32,7 @@ public:
     void getMac(uint8_t* mac);
     void setMacAddress(uint8_t *macAddress);
 
+    void leasedDHCP();
 
 private:
     void WriteSPIRegister(uint16_t offset, uint8_t *buffer, int size, uint8_t reg = 0, uint32_t timeout = 5000);
@@ -84,14 +86,15 @@ private:
 
 
 private:
-
+    std::unique_ptr<W5500Socket> dhcpSocket;
+    DHCPHelp dhcpHelp;
     std::unique_ptr<W5500Config> config;
     W5500DeviceInfo deviceInfo;
     std::bitset<8> socketsState{};
 
     void setInterrupt();
 
-    IpInfo GetIpInfoFromHDCP();
+    IpInfo GetIpInfoFromDHCP();
 };
 
 

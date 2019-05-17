@@ -26,7 +26,7 @@ public:
     uint32_t ServerPort{};
 
 private:
-    static constexpr int32_t ConfigFlashAddress = 0x800F000;
+    static constexpr int32_t ConfigFlashAddress = 0x800FF00;
 
     void WriteData();
 

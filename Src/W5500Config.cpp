@@ -16,7 +16,7 @@ IpInfo W5500Config::loadIpInfo() {
 }
 
 bool W5500Config::isManual() {
-    return true;
+    return false;
 }
 
 void W5500Config::loadMacAddress(uint8_t *mac) {

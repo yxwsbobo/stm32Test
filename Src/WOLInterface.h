@@ -14,6 +14,7 @@ extern "C" {
     int RunCode();
 
     uint16_t ChangeLittleBigEnd(uint16_t value);
+    uint32_t ChangeLittleBigEnd32(uint32_t value);
 
 
 typedef struct GPIOInfo_{

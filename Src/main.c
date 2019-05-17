@@ -61,6 +61,7 @@ static void MX_NVIC_Init(void);
 /* USER CODE BEGIN 0 */
 int GlobalFlag = 0;
 
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     GlobalFlag = 1;
 //    for (int i = 0; i < 100; ++i) {

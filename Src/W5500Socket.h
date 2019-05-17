@@ -22,6 +22,7 @@ public:
 public:
     friend class W5500Manager;
     W5500Socket(const std::weak_ptr<W5500Manager>& manager, SocketInfo info);
+
     void setDestIp(uint8_t* Ip);
     void setDestPort(uint16_t Port);
 
@@ -37,6 +38,9 @@ public:
     void Transmit(void* buffer, int bufferSize);
     bool Receive(std::string& message);
     int Receive(void* buffer, int bufferSize);
+
+private:
+    W5500Socket();
 
 private:
     std::weak_ptr<W5500Manager> manager;

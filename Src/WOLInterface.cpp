@@ -35,5 +35,8 @@ uint16_t ChangeLittleBigEnd(uint16_t value) {
     return ((value & 0x00ff)<<8) | ((value & 0xff00)>>8);
 }
 
+uint32_t ChangeLittleBigEnd32(uint32_t value) {
+    return ((value & 0x00ff)<<24) | ((value & 0xff00)<<8) | ((value & 0xff0000)>>8)|((value & 0xff000000)>>24);
+}
 
 #endif

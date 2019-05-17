@@ -13,7 +13,7 @@ void ConfigUseFlash::SaveConfig() {
 
     FLASH_EraseInitTypeDef f;
     f.TypeErase = FLASH_TYPEERASE_PAGES;
-    f.PageAddress = ConfigFlashAddress;
+    f.PageAddress = ConfigFlashAddress & (~0xFFF);
     f.NbPages = 1;
     f.Banks = 1;
     uint32_t PageError = 0;
@@ -55,8 +55,10 @@ void ConfigUseFlash::WriteData() {
 
     HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,add,0X4B696E);
     add+= sizeof(uint32_t);
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, add,*(uint64_t*)Mac);
-    add+= sizeof(uint64_t);
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, add,*(uint32_t *)Mac);
+    add+= sizeof(uint32_t);
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, add,*(uint32_t *)(Mac+4));
+    add+= sizeof(uint32_t);
     HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,add,*(uint32_t*)Ip);
     add+= sizeof(uint32_t);
     HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,add,*(uint32_t*)ServerIp);

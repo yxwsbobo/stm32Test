@@ -26,9 +26,9 @@ private:
 
     MessageInfo FillMessageInfo(uint8_t *buffer, int size);
 
-    void ProcessInfo(W5500Socket& socket, MessageInfo info);
+    void ProcessInfo(std::unique_ptr<W5500Socket>& socket, MessageInfo info);
 
-    void WakePc(W5500Socket &socket, const uint8_t* mac);
+    void WakePc(std::unique_ptr<W5500Socket> &socket, const uint8_t* mac);
 
     void saveServerIp(uint8_t *ip);
 
