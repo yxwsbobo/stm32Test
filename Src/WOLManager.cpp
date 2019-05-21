@@ -77,7 +77,8 @@ MessageInfo WOLManager::FillMessageInfo(uint8_t *buffer, int size) {
 }
 
 void WOLManager::ProcessInfo(std::unique_ptr<W5500Socket>& socket, MessageInfo info) {
-    if(info.head.CheckSum[0] != 0X6B || info.head.CheckSum[1] != 0X69 || info.head.CheckSum[2] != 0x6E){
+    if(info.head.CheckSum[0] != 0x0 | info.head.CheckSum[1] != 0X4B ||
+    info.head.CheckSum[2] != 0X69 || info.head.CheckSum[3] != 0x6E){
         return;
     }
 
@@ -97,7 +98,8 @@ void WOLManager::ProcessInfo(std::unique_ptr<W5500Socket>& socket, MessageInfo i
         socket->setDestPort(info.head.Port);
     }else if(info.head.Type == MessageType::SetMac){
         saveMacAddress(info.head.Mac);
-        w5500Manager->setMacAddress(info.head.Mac);
+        //Need Restart
+//        w5500Manager->setMacAddress(info.head.Mac);
     }
 }
 

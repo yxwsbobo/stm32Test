@@ -34,18 +34,18 @@ public:
 
     void leasedDHCP();
 
+    void setIp(uint8_t* Ip);
+    void setMask(uint8_t* mask);
+    void setGateWay(uint8_t* gateWay);
 private:
     void WriteSPIRegister(uint16_t offset, uint8_t *buffer, int size, uint8_t reg = 0, uint32_t timeout = 5000);
     void ReadSPIRegister(uint16_t offset, uint8_t *buff, size_t size, uint8_t reg = 0, uint32_t timeout = 5000);
 
     void setMacAddress(std::string macAddress);
     void setIp(const std::string& Ip);
-    void setIp(uint8_t* Ip);
     void readIp(std::string& Ip);
     void setMask(const std::string& mask);
-    void setMask(uint8_t* mask);
     void setGateWay(const std::string& gateWay);
-    void setGateWay(uint8_t* gateWay);
 
 
     friend W5500Socket;

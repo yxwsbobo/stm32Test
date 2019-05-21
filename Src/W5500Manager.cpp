@@ -25,6 +25,7 @@ void W5500Manager::reStart() {
     HAL_GPIO_WritePin(deviceInfo.Reset.Port, deviceInfo.Reset.Pin, GPIO_PIN_SET);
     HAL_Delay(2000);
 
+//    setInterrupt();
     uint8_t mac[6];
     config->loadMacAddress(mac);
     setMacAddress(mac);
@@ -35,14 +36,13 @@ void W5500Manager::reStart() {
         setIpInfoAuto();
     }
 
-    setInterrupt();
 }
 
 void W5500Manager::setInterrupt() {
     auto value = (uint8_t)InterruptMaskRegisterValue::IpConflict | (uint8_t)InterruptMaskRegisterValue::AddressUnavaliable;
     writeRegister(ModeRegisterConfigAddress::InterruptMaskRegister, &value, 1);
 
-    value = 0xfE;
+    value = 0xFF;
     writeRegister(ModeRegisterConfigAddress::SocketInterruptMaskRegister, &value, 1);
 }
 
@@ -179,7 +179,6 @@ void W5500Manager::setIp(const std::string& Ip) {
 void W5500Manager::setIp(uint8_t *Ip) {
     writeRegister(ModeRegisterConfigAddress::SourceIP, Ip, 4);
 }
-
 
 
 void W5500Manager::readIp(std::string &Ip) {
@@ -416,8 +415,7 @@ void W5500Manager::leasedDHCP() {
     dhcpHelp.GetDestIp(destPoint.Ip);
     dhcpHelp.GetDestPort(destPoint.Port);
     dhcpSocket->Transmit(&msg, sizeof(msg), destPoint);
+
 }
-
-
 
 

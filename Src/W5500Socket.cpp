@@ -110,9 +110,9 @@ int W5500Socket::Receive(void *buffer, int size) {
     int result = 0;
     if(auto m = manager.lock()){
 
-        if(!GlobalFlag)
-            return result;
-        GlobalFlag = 0;
+//        if(!GlobalFlag)
+//            return result;
+//        GlobalFlag = 0;
 
         uint8_t iValue;
         m->readRegister(ModeRegisterConfigAddress::InterruptRegister, &iValue, 1);
@@ -123,13 +123,13 @@ int W5500Socket::Receive(void *buffer, int size) {
         if(iValue & (uint8_t)InterruptMaskRegisterValue::AddressUnavaliable){
         }
 
-        uint8_t socketInterruptRegister = 0;
-        m->readRegister(ModeRegisterConfigAddress::SocketInterruptRegister, &socketInterruptRegister, 1);
-        m->writeRegister(ModeRegisterConfigAddress::SocketInterruptRegister, &socketInterruptRegister, 1);
-        if((socketInterruptRegister & info.index) == info.index){
-            auto iType = m->readSocketInterruptRegister(info.index);
-            if(iType & (uint8_t)SocketInterruptRegisterValue::Receive)
-            {
+//        uint8_t socketInterruptRegister = 0;
+//        m->readRegister(ModeRegisterConfigAddress::SocketInterruptRegister, &socketInterruptRegister, 1);
+//        m->writeRegister(ModeRegisterConfigAddress::SocketInterruptRegister, &socketInterruptRegister, 1);
+//        if((socketInterruptRegister & info.index) == info.index){
+//            auto iType = m->readSocketInterruptRegister(info.index);
+//            if(iType & (uint8_t)SocketInterruptRegisterValue::Receive)
+//            {
                 auto receivedSize = m->getRXReceivedSize(info.index);
                 if(receivedSize == 0){
                     return result;
@@ -138,23 +138,20 @@ int W5500Socket::Receive(void *buffer, int size) {
                 result = m->readRXReceivedBuffer(info.index, buffer, size);
 
                 m->writeRegister(info.index, SocketCommandRegisterValue::Receive);
-            }
-        }
+//            }
+//        }
     }
 
     return result;
 }
 
 void W5500Socket::setDestIp(uint8_t *Ip) {
-    if(auto m = manager.lock()) {
-        m->setSocketDestIp(info.index, Ip);
-    }
+    memcpy(info.destIp, Ip, 4);
+
 }
 
 void W5500Socket::setDestPort(uint16_t Port) {
-    if(auto m = manager.lock()) {
-        m->setSocketDestPort(info.index, Port);
-    }
+    info.destPort = Port;
 }
 
 W5500Socket::W5500Socket() {}
